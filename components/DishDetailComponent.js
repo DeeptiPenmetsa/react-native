@@ -14,7 +14,19 @@ const mapStateToProps = state => {
 function RenderDish(props) {
     const dish = props.dish;
 
-    if(dish!=null){
+    if (props.isLoading) {
+        return(
+                <Loading />
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <View> 
+                <Text>{props.erreMess}</Text>
+            </View>
+        );
+    }
+    else if(dish!=null){
         return(
             <Card featuredTitle={dish.name} 
             image={{uri: baseUrl + dish.image}}
