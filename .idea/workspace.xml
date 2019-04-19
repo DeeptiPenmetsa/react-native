@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a4933e28-6ab7-4d8e-9011-457b47821a13" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/redux/favourites.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/favourites.js" afterDir="false" />
-    </list>
+    <list default="true" id="a4933e28-6ab7-4d8e-9011-457b47821a13" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
