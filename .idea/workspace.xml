@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4933e28-6ab7-4d8e-9011-457b47821a13" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/components/DishDetailComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/DishDetailComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/FavoritesComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/FavoritesComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redux/ActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/ActionCreators.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redux/ActionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/ActionTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/favourites.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/favourites.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/leaders.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/leaders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="540" />
     <option name="y" value="25" />
     <option name="width" value="1295" />
@@ -83,7 +86,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.32980832" />
       <window_info id="Structure" side_tool="true" />
