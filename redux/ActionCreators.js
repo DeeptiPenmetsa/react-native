@@ -68,6 +68,11 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
+export const updateDish = (key, value) =>({ 
+    type: UPDATE_DISH,
+     key,value 
+});
+
 export const fetchPromos = () => (dispatch) => {
     
     dispatch(promosLoading());
@@ -170,6 +175,11 @@ export const addToCart = (dishId) => ({
 
 export const deleteFavorite =(dishId) => ({
     type:ActionTypes.DELETE_FAVORITE,
+    payload:dishId
+});
+
+export const deleteOrder =(dishId) => ({
+    type:ActionTypes.DELETE_ORDER,
     payload:dishId
 })
 

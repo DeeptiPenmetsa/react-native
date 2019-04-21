@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a4933e28-6ab7-4d8e-9011-457b47821a13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/DishDetailComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/DishDetailComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/ActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/ActionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/ActionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/ActionTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/dishes.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/dishes.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="1407" />
     <option name="y" value="25" />
     <option name="width" value="428" />
@@ -80,7 +84,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1126" y="20" width="342" height="776" extended-state="0" />
+    <frame x="1126" y="20" width="342" height="776" extended-state="1" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" visible="true" weight="1.0" />
       <window_info id="Structure" side_tool="true" />

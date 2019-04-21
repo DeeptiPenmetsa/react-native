@@ -3,7 +3,7 @@ import { View, Text, ScrollView, FlatList, Picker } from 'react-native';
 import { Card, Icon, Rating } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { postFavorite, postComment, postToCart } from '../redux/ActionCreators';
+import { postFavorite, postComment, postToCart, updateDish } from '../redux/ActionCreators';
 import Comment from './CommentForm';
 
 const mapStateToProps = state => {
@@ -19,13 +19,18 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     postFavorite: (dishId) => dispatch(postFavorite(dishId)),
     postToCart: (dishId) => dispatch(postToCart(dishId)),
-    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment))
+    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
+    updateDish: (key, value) =>dispatch(updateDish(key,value))
 });
 
 
 
 function RenderDish(props) {
     const dish = props.dish;
+
+    const updateFieldEvent =
+      key => ev => dish.updateDish(key, ev.target.value);
+      this.changeQuantity = updateFieldEvent('quantity');
 
     if (props.isLoading) {
         return (
@@ -58,6 +63,7 @@ function RenderDish(props) {
                     <Picker
                         style={{ flex: 1 }}
                         selectedValue={dish.quantity}
+                        onValueChange={this.changeQuantity}
                         >
                         <Picker.Item label="1" value="1" />
                         <Picker.Item label="2" value="2" />

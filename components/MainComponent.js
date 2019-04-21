@@ -7,6 +7,7 @@ import Reservation from './ReservationComponent';
 import Favorites from './FavoritesComponent';
 import DishDetail from './DishDetailComponent';
 import Profile from './ProfileComponent';
+import OrderSummary from './OrderSummaryComponent';
 import { View, Platform, Image, StyleSheet, ScrollView, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
@@ -133,6 +134,22 @@ const AboutNavigator = createStackNavigator({
         })
     });
 
+    const OrderSummaryNavigator = createStackNavigator({
+        OrderSummary: { screen: OrderSummary }
+    }, {
+            navigationOptions: ({ navigation }) => ({
+                headerStyle: {
+                    backgroundColor: "#512DA8"
+                },
+                headerTitleStyle: {
+                    color: "#fff"
+                },
+                headerTintColor: "#fff",
+                headerLeft: <Icon name='menu' size={24}
+                    color='white' onPress={() => navigation.toggleDrawer()} />
+            })
+        });
+
     const ProfileNavigator = createStackNavigator({
         Profile: { screen: Profile }
     }, {
@@ -204,6 +221,20 @@ const MainNavigator = createDrawerNavigator({
             drawerLabel: 'Menu',
             drawerIcon: ({ tintColor }) => (
                 <Icon name='list'
+                    type='font-awesome'
+                    size={24}
+                    color={tintColor} />
+            )
+        },
+    },
+    OrderSummary:
+    {
+        screen: OrderSummaryNavigator,
+        navigationOptions: {
+            title: 'Order Summary',
+            drawerLabel: 'Order Summary',
+            drawerIcon: ({ tintColor }) => (
+                <Icon name='shopping-cart'
                     type='font-awesome'
                     size={24}
                     color={tintColor} />

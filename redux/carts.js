@@ -7,7 +7,10 @@ export const carts = (state = [], action) => {
                 return state;
             else
                 return state.concat(action.payload);
-            
+               
+         case ActionTypes.DELETE_ORDER:
+            return state.filter((order) => order !== action.payload)
+
         default:
             return state;
     }

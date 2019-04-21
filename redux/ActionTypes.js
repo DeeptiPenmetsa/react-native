@@ -19,3 +19,5 @@ export const POST_TO_CART = 'POST_TO_CART';
 export const ADD_CONTACT= 'ADD_CONTACT';
 export const CONTACT_LOADING= 'CONTACT_LOADING';
 export const CONTACT_FAILED = 'CONTACT_FAILED';
+export const UPDATE_DISH = 'UPDATE_DISH';
+export const DELETE_ORDER = 'DELETE_ORDER';
