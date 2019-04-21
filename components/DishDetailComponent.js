@@ -28,10 +28,6 @@ const mapDispatchToProps = dispatch => ({
 function RenderDish(props) {
     const dish = props.dish;
 
-    const updateFieldEvent =
-      key => ev => dish.updateDish(key, ev.target.value);
-      this.changeQuantity = updateFieldEvent('quantity');
-
     if (props.isLoading) {
         return (
             <Loading />
@@ -63,7 +59,6 @@ function RenderDish(props) {
                     <Picker
                         style={{ flex: 1 }}
                         selectedValue={dish.quantity}
-                        onValueChange={this.changeQuantity}
                         >
                         <Picker.Item label="1" value="1" />
                         <Picker.Item label="2" value="2" />

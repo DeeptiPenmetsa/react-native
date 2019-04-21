@@ -12,7 +12,6 @@ import {
 import { Card, Icon, ListItem, Divider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { Loading } from './LoadingComponent';
 
 const mapStateToProps = state => {
   return {

@@ -68,11 +68,6 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
-export const updateDish = (key, value) =>({ 
-    type: UPDATE_DISH,
-     key,value 
-});
-
 export const fetchPromos = () => (dispatch) => {
     
     dispatch(promosLoading());

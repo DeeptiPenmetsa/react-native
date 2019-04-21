@@ -57,9 +57,8 @@ const mapStateToProps = state => {
                 <ListItem
                 key={index}
                 title={item.name}
-                subtitle={item.price}
-                rightTitle='Quantity'
-                rightSubtitle={item.quantity}
+                subtitle={'Price: ' + item.price + ' Qty: ' + item.quantity}
+                rightTitle={(item.price * item.quantity) + '$' }
                 hideChevron={true}
                 onPress={() => navigate ('DishDetail', {dishId:item.id})}
                 leftAvatar={{ source: {uri: baseUrl + item.image}}}
