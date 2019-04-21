@@ -56,17 +56,6 @@ function RenderDish(props) {
                         margin: 20
                     }}>
                     <Text style={{ margin: 10, fontSize: 20, alignContent: 'flex-end', color: 'red' }}>{'Price:' + dish.price + '$'}</Text>
-                    <Picker
-                        style={{ flex: 1 }}
-                        selectedValue={dish.quantity}
-                        >
-                        <Picker.Item label="1" value="1" />
-                        <Picker.Item label="2" value="2" />
-                        <Picker.Item label="3" value="3" />
-                        <Picker.Item label="4" value="4" />
-                        <Picker.Item label="5" value="5" />
-                        <Picker.Item label="6" value="6" />
-                    </Picker>
                 </View>
                 <View style={{ justiftyContent: 'space-between', flexDirection: 'row' }}>
                     <Icon raised

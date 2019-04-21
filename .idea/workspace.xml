@@ -5,9 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/DishDetailComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/DishDetailComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/OrderSummaryComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/OrderSummaryComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ProfileComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/ProfileComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/ActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/ActionCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/dishes.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/dishes.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
