@@ -155,6 +155,19 @@ export const addFavorite = (dishId) => ({
     payload: dishId
 });
 
+export const postToCart = (dishId)  => (dispatch) => {
+
+    setTimeout(() => {
+        dispatch(addToCart(dishId));
+    }, 1000);
+};
+
+
+export const addToCart = (dishId) => ({
+    type: ActionTypes.ADD_TO_CART,
+    payload: dishId
+});
+
 export const deleteFavorite =(dishId) => ({
     type:ActionTypes.DELETE_FAVORITE,
     payload:dishId
@@ -201,3 +214,40 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     .then(response => setTimeout(() => { dispatch(addComment(response));}, 2000))
     .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
 };
+
+export const fetchContact = () => (dispatch) => {
+
+    dispatch(contactLoading());
+
+    return fetch(baseUrl + 'contact')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(contact => dispatch(addContact(contact)))
+    .catch(error => dispatch(contactFailed(error.message)));
+};
+
+export const contactLoading = () => ({
+    type: ActionTypes.CONTACT_LOADING
+});
+
+export const contactFailed = (errmess) => ({
+    type: ActionTypes.CONTACT_FAILED,
+    payload: errmess
+});
+
+export const addContact = (contact) => ({
+    type: ActionTypes.ADD_CONTACT,
+    payload: contact
+});

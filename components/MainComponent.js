@@ -6,18 +6,20 @@ import Contact from './ContactComponent';
 import Reservation from './ReservationComponent';
 import Favorites from './FavoritesComponent';
 import DishDetail from './DishDetailComponent';
+import Profile from './ProfileComponent';
 import { View, Platform, Image, StyleSheet, ScrollView, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
-import { fetchDishes, fetchComments, fetchLeaders, fetchPromos } from '../redux/ActionCreators';
+import { fetchDishes, fetchComments, fetchLeaders, fetchPromos, fetchContact } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
         dishes: state.dishes,
         comments: state.comments,
         promotions: state.promotions,
-        leaders: state.leaders
+        leaders: state.leaders,
+        contact: state.contact
     }
 }
 
@@ -25,7 +27,8 @@ const mapDispatchToProps = dispatch => ({
     fetchDishes: () => dispatch(fetchDishes()),
     fetchComments: () => dispatch(fetchComments()),
     fetchPromos: () => dispatch(fetchPromos()),
-    fetchLeaders: () => dispatch(fetchLeaders())
+    fetchLeaders: () => dispatch(fetchLeaders()),
+    fetchContact: () => dispatch(fetchContact())
 })
 
 const MenuNavigator = createStackNavigator({
@@ -130,6 +133,22 @@ const AboutNavigator = createStackNavigator({
         })
     });
 
+    const ProfileNavigator = createStackNavigator({
+        Profile: { screen: Profile }
+    }, {
+            navigationOptions: ({ navigation }) => ({
+                headerStyle: {
+                    backgroundColor: "#512DA8"
+                },
+                headerTitleStyle: {
+                    color: "#fff"
+                },
+                headerTintColor: "#fff",
+                headerLeft: <Icon name='menu' size={24}
+                    color='white' onPress={() => navigation.toggleDrawer()} />
+            })
+        });
+
 const CustomDrawerContentComponent = (props) => (
 
     <ScrollView>
@@ -230,6 +249,19 @@ const MainNavigator = createDrawerNavigator({
                     color={tintColor} />
             )
         },
+    },
+    Profile: {
+        screen: ProfileNavigator,
+        navigationOptions: {
+            title: 'My Profile',
+            drawerLabel: 'My Profile',
+            drawerIcon: ({ tintColor }) => (
+                <Icon name='user'
+                    type='font-awesome'
+                    size={24}
+                    color={tintColor} />
+            )
+        },
     }
 }, {
         drawerBackgroundColor: '#D1C4E9',
@@ -246,6 +278,7 @@ class Main extends Component {
         this.props.fetchDishes();
         this.props.fetchLeaders();
         this.props.fetchPromos();
+        this.props.fetchContact();
     }
 
     render() {
