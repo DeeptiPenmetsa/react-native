@@ -6,9 +6,10 @@ import {
   Image,
   ImageBackground,
   ScrollView,
-  Platform
+  Platform,
+  FlatList
 } from 'react-native';
-import { Card, Icon } from 'react-native-elements';
+import { Card, Icon, ListItem, Divider } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
@@ -66,6 +67,59 @@ function RenderHeader(props) {
   )
 }
 
+function RenderTel(props) {
+  const contact = props.contact;
+  const renderTelItem = ({ item, index }) => {
+    return (
+      <ListItem key={index}
+        title={item.name}
+        subtitle={item.number}
+        hideChevron={true}
+        leftIcon={
+          <Icon
+              name='phone'
+              size={24}
+              color='black'
+          />
+        }
+      />
+    )
+  }
+  return (
+      <FlatList
+        data={contact.tels}
+        renderItem={renderTelItem}
+        keyExtractor={item => item.id.toString()}
+      />
+  );
+}
+
+function RenderEmail(props) {
+  const contact = props.contact;
+  const renderEmailItem = ({ item, index }) => {
+    return (
+      <ListItem key={index}
+        title={item.name}
+        subtitle={item.email}
+        hideChevron={true}
+        leftIcon={
+          <Icon
+              name='message'
+              size={24}
+              color='black'
+          />
+        }
+      />
+    )
+  }
+  return (
+      <FlatList
+        data={contact.emails}
+        renderItem={renderEmailItem}
+        keyExtractor={item => item.id.toString()}
+      />
+  );
+}
 
 
 class Profile extends Component {
@@ -81,7 +135,9 @@ class Profile extends Component {
         <View style={styles.container}>
           <Card containerStyle={styles.cardContainer}>
             <RenderHeader contact={this.props.contact.contact} />
-            
+            <RenderTel contact={this.props.contact.contact} />
+            {Separator()}
+            <RenderEmail contact={this.props.contact.contact} />
           </Card>
         </View>
       </ScrollView>
@@ -169,6 +225,29 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 })
+
+const stylesSeperator = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+  },
+  separatorOffset: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  separator: {
+    flex: 8,
+    flexDirection: 'row',
+    borderColor: '#523abc',
+    borderWidth: 0.8,
+  },
+})
+
+const Separator = () => (
+  <View style={stylesSeperator.container}>
+    <View style={stylesSeperator.separatorOffset} />
+    <View style={stylesSeperator.separator} />
+  </View>
+)
 
 
 export default connect(mapStateToProps)(Profile);
