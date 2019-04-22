@@ -4,7 +4,9 @@
     <list default="true" id="a4933e28-6ab7-4d8e-9011-457b47821a13" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/DishDetailComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/DishDetailComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/OrderSummaryComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/OrderSummaryComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/ActionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/ActionCreators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/redux/dishes.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/dishes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/baseUrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/shared/baseUrl.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +18,7 @@
     <session id="-1522442571">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
@@ -84,20 +87,20 @@
   <component name="ToolWindowManager">
     <frame x="1126" y="20" width="342" height="776" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="1.0" />
-      <window_info id="Structure" side_tool="true" />
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="TODO" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info id="Capture Tool" order="1" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="1.0" />
+      <window_info id="Structure" order="3" side_tool="true" />
+      <window_info id="Image Layers" order="4" />
+      <window_info id="Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="TODO" order="0" />
+      <window_info anchor="bottom" id="Terminal" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="right" id="Theme Preview" order="1" />
+      <window_info anchor="right" id="Palette&#9;" order="2" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">

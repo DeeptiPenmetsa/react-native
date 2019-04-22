@@ -108,7 +108,7 @@ class OrderSummary extends Component {
                 <ScrollView>
                     <FlatList
                         data={this.props.dishes.dishes.filter(dish => this.props.carts.some(el => el === dish.id))}
-                        renderItem={({ item }) => <ListItem item={item} />}
+                        renderItem={({ item }) => <ListItem item={item} deleteOrder={this.props.deleteOrder}/>}
                         keyExtractor={item => item.id.toString()}
                     />
                     <Text>Total Price:</Text>

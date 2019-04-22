@@ -3,7 +3,7 @@ import { View, Text, ScrollView, FlatList, Picker } from 'react-native';
 import { Card, Icon, Rating } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { postFavorite, postComment, postToCart, updateDish } from '../redux/ActionCreators';
+import { postFavorite, postComment, postToCart} from '../redux/ActionCreators';
 import Comment from './CommentForm';
 
 const mapStateToProps = state => {
@@ -19,8 +19,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     postFavorite: (dishId) => dispatch(postFavorite(dishId)),
     postToCart: (dishId) => dispatch(postToCart(dishId)),
-    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
-    updateDish: (key, value) =>dispatch(updateDish(key,value))
+    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment))
 });
 
 
