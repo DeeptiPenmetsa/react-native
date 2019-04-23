@@ -76,20 +76,18 @@ class ListItem extends Component {
 
 class OrderSummary extends Component {
 
-    onSubtract = (item, index) => {
-        const dishes={...this.props.dishes.dishes};
-        dishes[index].quantity -=1;
-        this.setState(dishes);
-        this.props.putDish(dishes[index].id,dishes[index].name, dishes[index].image, dishes[index].category, dishes[index].label,
-             dishes[index].price, dishes[index].featured, dishes[index].quantity, dishes[index].description);
+    onSubtract = (item) => {
+        item.quantity -= 1;
+        this.setState(item);
+        this.props.putDish(item.id,item.name, item.image, item.category, item.label,
+            item.price, item.featured, item.quantity, item.description);
     }
 
-    onAdd = (item, index) => {
-        const dishes={...this.props.dishes.dishes};
-        dishes[index].quantity +=1;
-        this.setState(dishes);
-        this.props.putDish(dishes[index].id,dishes[index].name, dishes[index].image, dishes[index].category, dishes[index].label,
-            dishes[index].price, dishes[index].featured, dishes[index].quantity, dishes[index].description);
+    onAdd= (item) => {
+        item.quantity += 1;
+        this.setState(item);
+        this.props.putDish(item.id,item.name, item.image, item.category, item.label,
+            item.price, item.featured, item.quantity, item.description);
     }
 
     static navigationOptions = {
@@ -118,9 +116,9 @@ class OrderSummary extends Component {
                         data={this.props.dishes.dishes.filter(dish => this.props.carts.some(el => el === dish.id))}
                         renderItem={({ item, index }) => 
                         <ListItem item={item}
-                        onSubtract={()=>this.onSubtract(item,index)}
-                        onAdd={()=>this.onAdd(item,index)}
-                         deleteOrder={this.props.deleteOrder} />}
+                        onSubtract={()=>this.onSubtract(item)}
+                        onAdd={()=>this.onAdd(item)}
+                         deleteOrder={this.props.deleteOrder}/>}
                         keyExtractor={item => item.id.toString()}
                     />
                     <Text>Total Price : {totalPrice}$</Text>
