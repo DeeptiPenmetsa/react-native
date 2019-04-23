@@ -68,10 +68,9 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
-export const updateDish = (id, name, image, category, label, price, featured, quantity, description) => (dispatch) => {
+export const putDish = (id, name, image, category, label, price, featured, quantity, description) => (dispatch) => {
 
     const dishUpdated = {
-        id: id,
         name: name,
         image: image,
         category: category,
@@ -103,9 +102,14 @@ export const updateDish = (id, name, image, category, label, price, featured, qu
             throw error;
       })
     .then(response => response.json())
-    .then(response => setTimeout(() => { dispatch(addDishes(response));}, 2000))
+    .then(response => setTimeout(() => { dispatch(updateDish(response));}, 2000))
     .catch(error =>  { console.log('Updated Dish', error.message); alert('Your Dish could not be Updated\nError: '+error.message); });
 };
+
+export const updateDish = (dishes) => ({
+    type: ActionTypes.UPDATE_DISH,
+    payload: dishes
+})
 
 
 export const fetchPromos = () => (dispatch) => {

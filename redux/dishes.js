@@ -15,6 +15,9 @@ export const dishes = (state = {
         case ActionTypes.DISHES_FAILED:
             return {...state, isLoading: false, errMess: action.payload};
 
+        case ActionTypes.UPDATE_DISH:
+           return {...state,isLoading:false,errMess:null, dishes:state.dishes};
+
         default:
           return state; 
     }

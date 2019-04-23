@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
 import Swipeout from 'react-native-swipeout'
-import { deleteOrder, updateDish } from '../redux/ActionCreators'
+import { deleteOrder, putDish } from '../redux/ActionCreators'
 import { ScrollView } from 'react-native-gesture-handler';
 
 const mapStateToProps = state => {
@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     deleteOrder: (dishId) => dispatch(deleteOrder(dishId)),
-    updateDish: (id,name, image, category, label, price, featured, quantity, description) => dispatch(updateDish(id, name, image, category, label, price, featured, quantity, description))
+    putDish: (id,name, image, category, label, price, featured, quantity, description) => dispatch(putDish(id, name, image, category, label, price, featured, quantity, description))
 })
 
 class ListItem extends Component {
@@ -80,12 +80,16 @@ class OrderSummary extends Component {
         const dishes={...this.props.dishes.dishes};
         dishes[index].quantity -=1;
         this.setState(dishes);
+        this.props.putDish(dishes[index].id,dishes[index].name, dishes[index].image, dishes[index].category, dishes[index].label,
+             dishes[index].price, dishes[index].featured, dishes[index].quantity, dishes[index].description);
     }
 
     onAdd = (item, index) => {
         const dishes={...this.props.dishes.dishes};
         dishes[index].quantity +=1;
         this.setState(dishes);
+        this.props.putDish(dishes[index].id,dishes[index].name, dishes[index].image, dishes[index].category, dishes[index].label,
+            dishes[index].price, dishes[index].featured, dishes[index].quantity, dishes[index].description);
     }
 
     static navigationOptions = {
@@ -94,11 +98,8 @@ class OrderSummary extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        const {dishes} = this.props.dishes;
-        let totalQuantity = 0;
         let totalPrice = 0;
-        dishes.forEach((item) => {
-           totalQuantity += item.quantity;
+        this.props.dishes.dishes.forEach((item) => {
            totalPrice += item.quantity * item.price;
         });
         
@@ -119,10 +120,10 @@ class OrderSummary extends Component {
                         <ListItem item={item}
                         onSubtract={()=>this.onSubtract(item,index)}
                         onAdd={()=>this.onAdd(item,index)}
-                         deleteOrder={this.props.deleteOrder} updateDish={this.props.updateDish} />}
+                         deleteOrder={this.props.deleteOrder} />}
                         keyExtractor={item => item.id.toString()}
                     />
-                    <Text>Total Price : {totalPrice}</Text>
+                    <Text>Total Price : {totalPrice}$</Text>
                 </ScrollView>
 
             );
