@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
 import Swipeout from 'react-native-swipeout'
-import { deleteOrder } from '../redux/ActionCreators'
+import { deleteOrder, updateDish } from '../redux/ActionCreators'
 import { ScrollView } from 'react-native-gesture-handler';
 
 const mapStateToProps = state => {
@@ -16,28 +16,15 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    deleteOrder: (dishId) => dispatch(deleteOrder(dishId))
+    deleteOrder: (dishId) => dispatch(deleteOrder(dishId)),
+    updateDish: (id,name, image, category, label, price, featured, quantity, description) => dispatch(updateDish(id, name, image, category, label, price, featured, quantity, description))
 })
 
 class ListItem extends Component {
 
-    state = {
-        quantity: 1
-    }
-
-    onSubtract = () => {
-        this.setState({ quantity: this.state.quantity - 1 });
-    }
-
-    onAdd = () => {
-        this.setState({ quantity: this.state.quantity + 1 });
-    }
-
     render() {
         const { item } = this.props;
-        const { quantity } = this.state;
-
-
+       
         const rightButton = [
             {
                 text: 'Delete',
@@ -77,9 +64,9 @@ class ListItem extends Component {
                         <Text>{item.name} - {item.price}$</Text>
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Button title="-" onPress={this.onSubtract} color="#841584" />
-                        <Text> {quantity} </Text>
-                        <Button title="+" onPress={this.onAdd} color="#841584" />
+                        <Button title="-" onPress={this.props.onSubtract} color="#841584" />
+                        <Text> {item.quantity} </Text>
+                        <Button title="+" onPress={this.props.onAdd} color="#841584" />
                     </View>
                 </View>
             </Swipeout>
@@ -89,12 +76,32 @@ class ListItem extends Component {
 
 class OrderSummary extends Component {
 
+    onSubtract = (item, index) => {
+        const dishes={...this.props.dishes.dishes};
+        dishes[index].quantity -=1;
+        this.setState(dishes);
+    }
+
+    onAdd = (item, index) => {
+        const dishes={...this.props.dishes.dishes};
+        dishes[index].quantity +=1;
+        this.setState(dishes);
+    }
+
     static navigationOptions = {
         title: 'Order Summary'
     }
 
     render() {
         const { navigate } = this.props.navigation;
+        const {dishes} = this.props.dishes;
+        let totalQuantity = 0;
+        let totalPrice = 0;
+        dishes.forEach((item) => {
+           totalQuantity += item.quantity;
+           totalPrice += item.quantity * item.price;
+        });
+        
         if (this.props.dishes.isLoading) {
             return (
                 <Loading />
@@ -108,10 +115,14 @@ class OrderSummary extends Component {
                 <ScrollView>
                     <FlatList
                         data={this.props.dishes.dishes.filter(dish => this.props.carts.some(el => el === dish.id))}
-                        renderItem={({ item }) => <ListItem item={item} deleteOrder={this.props.deleteOrder}/>}
+                        renderItem={({ item, index }) => 
+                        <ListItem item={item}
+                        onSubtract={()=>this.onSubtract(item,index)}
+                        onAdd={()=>this.onAdd(item,index)}
+                         deleteOrder={this.props.deleteOrder} updateDish={this.props.updateDish} />}
                         keyExtractor={item => item.id.toString()}
                     />
-                    <Text>Total Price:</Text>
+                    <Text>Total Price : {totalPrice}</Text>
                 </ScrollView>
 
             );

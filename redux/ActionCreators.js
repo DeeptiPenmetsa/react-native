@@ -68,7 +68,45 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
-export const updateDishes= (key, value) =>({ type: ActionTypes.UPDATE_DISH, key, value });
+export const updateDish = (id, name, image, category, label, price, featured, quantity, description) => (dispatch) => {
+
+    const dishUpdated = {
+        id: id,
+        name: name,
+        image: image,
+        category: category,
+        label: label,
+        price: price,
+        featured: featured,
+        quantity: quantity,
+        description: description
+        
+    };
+    return fetch(baseUrl + 'dishes/' + id , {
+        method: "PUT",
+        body: JSON.stringify(dishUpdated),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+    .then(response => response.json())
+    .then(response => setTimeout(() => { dispatch(addDishes(response));}, 2000))
+    .catch(error =>  { console.log('Updated Dish', error.message); alert('Your Dish could not be Updated\nError: '+error.message); });
+};
+
 
 export const fetchPromos = () => (dispatch) => {
     
