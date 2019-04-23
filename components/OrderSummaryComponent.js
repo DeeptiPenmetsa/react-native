@@ -41,7 +41,7 @@ class ListItem extends Component {
                             },
                             {
                                 text: 'OK',
-                                onPress: () => this.props.deleteOrder(item.id)
+                                onPress: () => {this.props.deleteOrder(item.id);this.props.handleDelete(item)}
                             }
                         ],
                         { cancelable: false }
@@ -77,7 +77,11 @@ class ListItem extends Component {
 class OrderSummary extends Component {
 
     onSubtract = (item) => {
-        item.quantity -= 1;
+        if(item.quantity > 0){
+            item.quantity -= 1;
+        } else {
+            item.quantity = 0;
+        } 
         this.setState(item);
         this.props.putDish(item.id,item.name, item.image, item.category, item.label,
             item.price, item.featured, item.quantity, item.description);
@@ -88,6 +92,13 @@ class OrderSummary extends Component {
         this.setState(item);
         this.props.putDish(item.id,item.name, item.image, item.category, item.label,
             item.price, item.featured, item.quantity, item.description);
+    }
+
+    handleDelete=(item) => {
+        item.quantity = 0;
+        this.setState(item);
+        this.props.putDish(item.id,item.name, item.image, item.category, item.label,
+            item.price, item.featured, item.quantity , item.description);
     }
 
     static navigationOptions = {
@@ -118,7 +129,8 @@ class OrderSummary extends Component {
                         <ListItem item={item}
                         onSubtract={()=>this.onSubtract(item)}
                         onAdd={()=>this.onAdd(item)}
-                         deleteOrder={this.props.deleteOrder}/>}
+                        deleteOrder={this.props.deleteOrder}
+                        handleDelete={()=>this.handleDelete(item)}/>}
                         keyExtractor={item => item.id.toString()}
                     />
                     <Text>Total Price : {totalPrice}$</Text>
