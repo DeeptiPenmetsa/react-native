@@ -7,6 +7,7 @@ import { Loading } from './LoadingComponent';
 import Swipeout from 'react-native-swipeout'
 import { deleteOrder, putDish } from '../redux/ActionCreators'
 import { ScrollView } from 'react-native-gesture-handler';
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
@@ -17,14 +18,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     deleteOrder: (dishId) => dispatch(deleteOrder(dishId)),
-    putDish: (id,name, image, category, label, price, featured, quantity, description) => dispatch(putDish(id, name, image, category, label, price, featured, quantity, description))
+    putDish: (id, name, image, category, label, price, featured, quantity, description) => dispatch(putDish(id, name, image, category, label, price, featured, quantity, description))
 })
 
 class ListItem extends Component {
 
     render() {
         const { item } = this.props;
-       
+
         const rightButton = [
             {
                 text: 'Delete',
@@ -41,7 +42,7 @@ class ListItem extends Component {
                             },
                             {
                                 text: 'OK',
-                                onPress: () => {this.props.deleteOrder(item.id);this.props.handleDelete(item)}
+                                onPress: () => { this.props.deleteOrder(item.id); this.props.handleDelete(item) }
                             }
                         ],
                         { cancelable: false }
@@ -77,28 +78,28 @@ class ListItem extends Component {
 class OrderSummary extends Component {
 
     onSubtract = (item) => {
-        if(item.quantity > 0){
+        if (item.quantity > 0) {
             item.quantity -= 1;
         } else {
             item.quantity = 0;
-        } 
+        }
         this.setState(item);
-        this.props.putDish(item.id,item.name, item.image, item.category, item.label,
+        this.props.putDish(item.id, item.name, item.image, item.category, item.label,
             item.price, item.featured, item.quantity, item.description);
     }
 
-    onAdd= (item) => {
+    onAdd = (item) => {
         item.quantity += 1;
         this.setState(item);
-        this.props.putDish(item.id,item.name, item.image, item.category, item.label,
+        this.props.putDish(item.id, item.name, item.image, item.category, item.label,
             item.price, item.featured, item.quantity, item.description);
     }
 
-    handleDelete=(item) => {
+    handleDelete = (item) => {
         item.quantity = 0;
         this.setState(item);
-        this.props.putDish(item.id,item.name, item.image, item.category, item.label,
-            item.price, item.featured, item.quantity , item.description);
+        this.props.putDish(item.id, item.name, item.image, item.category, item.label,
+            item.price, item.featured, item.quantity, item.description);
     }
 
     static navigationOptions = {
@@ -109,9 +110,9 @@ class OrderSummary extends Component {
         const { navigate } = this.props.navigation;
         let totalPrice = 0;
         this.props.dishes.dishes.forEach((item) => {
-           totalPrice += item.quantity * item.price;
+            totalPrice += item.quantity * item.price;
         });
-        
+
         if (this.props.dishes.isLoading) {
             return (
                 <Loading />
@@ -123,17 +124,19 @@ class OrderSummary extends Component {
         } else {
             return (
                 <ScrollView>
-                    <FlatList
-                        data={this.props.dishes.dishes.filter(dish => this.props.carts.some(el => el === dish.id))}
-                        renderItem={({ item, index }) => 
-                        <ListItem item={item}
-                        onSubtract={()=>this.onSubtract(item)}
-                        onAdd={()=>this.onAdd(item)}
-                        deleteOrder={this.props.deleteOrder}
-                        handleDelete={()=>this.handleDelete(item)}/>}
-                        keyExtractor={item => item.id.toString()}
-                    />
-                    <Text>Total Price : {totalPrice}$</Text>
+                    <Animatable.View animation="fadeInRight" duration={2000}>
+                        <FlatList
+                            data={this.props.dishes.dishes.filter(dish => this.props.carts.some(el => el === dish.id))}
+                            renderItem={({ item, index }) =>
+                                <ListItem item={item}
+                                    onSubtract={() => this.onSubtract(item)}
+                                    onAdd={() => this.onAdd(item)}
+                                    deleteOrder={this.props.deleteOrder}
+                                    handleDelete={() => this.handleDelete(item)} />}
+                            keyExtractor={item => item.id.toString()}
+                        />
+                        <Text>Total Price : {totalPrice}$</Text>
+                    </Animatable.View>
                 </ScrollView>
 
             );

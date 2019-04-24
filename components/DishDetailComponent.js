@@ -3,8 +3,9 @@ import { View, Text, ScrollView, FlatList, Picker } from 'react-native';
 import { Card, Icon, Rating } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import { postFavorite, postComment, postToCart} from '../redux/ActionCreators';
+import { postFavorite, postComment, postToCart } from '../redux/ActionCreators';
 import Comment from './CommentForm';
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
@@ -41,39 +42,40 @@ function RenderDish(props) {
     }
     else if (dish != null) {
         return (
-            <Card featuredTitle={dish.name}
-                image={{ uri: baseUrl + dish.image }}
-            >
-                <Text style={{ margin: 10 }}>
-                    {dish.description}
-                </Text>
-                <View style={{
+            <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+                <Card featuredTitle={dish.name}
+                    image={{ uri: baseUrl + dish.image }}
+                >
+                    <Text style={{ margin: 10 }}>
+                        {dish.description}
+                    </Text>
+                    <View style={{
                         alignItems: 'center',
                         justifyContent: 'center',
                         flex: 1,
                         flexDirection: 'row',
                         margin: 20
                     }}>
-                    <Text style={{ margin: 10, fontSize: 20, alignContent: 'flex-end', color: 'red' }}>{'Price:' + dish.price + '$'}</Text>
-                </View>
-                <View style={{ justiftyContent: 'space-between', flexDirection: 'row' }}>
-                    <Icon raised
-                        reverse
-                        name={props.favorite ? 'heart' : 'heart-o'}
-                        type='font-awesome'
-                        color='#f50'
-                        onPress={() => props.favorite ? console.log('Already favourite') : props.onPress()} />
+                        <Text style={{ margin: 10, fontSize: 20, alignContent: 'flex-end', color: 'red' }}>{'Price:' + dish.price + '$'}</Text>
+                    </View>
+                    <View style={{ justiftyContent: 'space-between', flexDirection: 'row' }}>
+                        <Icon raised
+                            reverse
+                            name={props.favorite ? 'heart' : 'heart-o'}
+                            type='font-awesome'
+                            color='#f50'
+                            onPress={() => props.favorite ? console.log('Already favourite') : props.onPress()} />
 
-                    <Comment dishId={dish.id} postComment={props.postComment} />
-                    <Icon raised
-                        reverse
-                        name={props.cart ? 'shopping-basket' : 'shopping-cart'}
-                        type='font-awesome'
-                        color='#f50'
-                        onPress={() => props.cart ? console.log('Already added to cart') : props.onPressCart()} />
-                </View>
-            </Card>
-
+                        <Comment dishId={dish.id} postComment={props.postComment} />
+                        <Icon raised
+                            reverse
+                            name={props.cart ? 'shopping-basket' : 'shopping-cart'}
+                            type='font-awesome'
+                            color='#f50'
+                            onPress={() => props.cart ? console.log('Already added to cart') : props.onPressCart()} />
+                    </View>
+                </Card>
+            </Animatable.View>
         );
     } else {
         return (<View></View>);
@@ -99,11 +101,13 @@ function RenderComments(props) {
     }
 
     return (
-        <Card title="Comments">
-            <FlatList data={comments}
-                renderItem={renderCommentItem}
-                keyExtractor={item => item.id.toString()} />
-        </Card>
+        <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>
+            <Card title="Comments">
+                <FlatList data={comments}
+                    renderItem={renderCommentItem}
+                    keyExtractor={item => item.id.toString()} />
+            </Card>
+        </Animatable.View>
     );
 }
 
@@ -131,7 +135,7 @@ class DishDetail extends Component {
                     onPress={() => this.markFavorite(dishId)}
                     postComment={this.props.postComment}
                     onPressCart={() => this.addToCart(dishId)}
-                    />
+                />
                 <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} />
             </ScrollView>
         );
