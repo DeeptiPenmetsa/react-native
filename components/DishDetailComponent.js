@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList, Picker, Alert, PanResponder } from 'react-native';
+import { View, Text, ScrollView, FlatList, Picker, Alert, PanResponder, Share } from 'react-native';
 import { Card, Icon, Rating } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 function RenderDish(props) {
     const dish = props.dish;
 
-    handleViewRef= ref => this.view = ref;
+    handleViewRef = ref => this.view = ref;
 
     const recognizeDragRight = ({ moveX, moveY, dx, dy }) => {
         if (dx < -200)
@@ -38,7 +38,7 @@ function RenderDish(props) {
     };
 
     const panResponder = PanResponder.create({
-        
+
         onStartShouldSetPanResponder: (e, gestureState) => {
             return true;
         },
@@ -47,10 +47,10 @@ function RenderDish(props) {
         },
         onPanResponderGrant: () => {
             this.view.rubberBand(1000)
-            .then(endState => console.log(endState.finished ? 'finished' : 'cancelled'));
+                .then(endState => console.log(endState.finished ? 'finished' : 'cancelled'));
         },
         onPanResponderEnd: (e, gestureState) => {
-            if (recognizeDragRight(gestureState)){
+            if (recognizeDragRight(gestureState)) {
                 Alert.alert(
                     'Add to Favorites',
                     'Are you Sure you wish to add ' + dish.name + ' to your favorites?',
@@ -60,10 +60,20 @@ function RenderDish(props) {
                     ],
                     { cancelable: false }
                 )
-            return true;
-            }   
+                return true;
+            }
         }
     })
+
+    const shareDish = (title, message, url) => {
+        Share.share({
+            title: title,
+            message: title + ': ' + message + ' ' + url,
+            url: url
+        }, {
+                dialogTitle: 'share' + title
+            });
+    }
 
     if (props.isLoading) {
         return (
@@ -112,6 +122,13 @@ function RenderDish(props) {
                             type='font-awesome'
                             color='#f50'
                             onPress={() => props.cart ? console.log('Already added to cart') : props.onPressCart()} />
+                        <Icon
+                            raised
+                            reverse
+                            name='share'
+                            type='font-awesome'
+                            color='#51D2A8'
+                            onPress={() => shareDish(dish.name, dish.description, baseUrl + dish.image)} />
                     </View>
                 </Card>
             </Animatable.View>
