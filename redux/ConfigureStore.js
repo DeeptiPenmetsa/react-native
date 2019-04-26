@@ -8,6 +8,7 @@ import { leaders } from './leaders';
 import {favorites} from './favourites';
 import {contact} from  './contact';
 import {carts} from './carts';
+import {users} from './users';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
 
@@ -26,7 +27,8 @@ export const ConfigureStore = () => {
             leaders,
             favorites,
             carts,
-            contact
+            contact,
+            users
         }),
         applyMiddleware(thunk,logger)
     );

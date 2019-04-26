@@ -68,6 +68,46 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
+export const registerUser = (username,password,firstname,lastname,email) => (dispatch) => {
+    const newUser = {
+        username:username,
+        password:password,
+        firstname:firstname,
+        lastname:lastname,
+        email:email
+    }
+    return fetch(baseUrl + 'users', {
+        method: "POST",
+        body: JSON.stringify(newUser),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+    .then(response => response.json())
+    .then(response => setTimeout(() => { dispatch(addUser(response));}, 1000))
+    .catch(error =>  { console.log('User Register', error.message); alert('User cannot be registered\nError: '+error.message); });
+};
+
+export const addUser = (user) => ({
+
+    type: ActionTypes.ADD_USER,
+    payload : user
+
+});
+
 export const putDish = (id, name, image, category, label, price, featured, quantity, description) => (dispatch) => {
 
     const dishUpdated = {
