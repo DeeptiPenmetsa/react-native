@@ -6,6 +6,7 @@ import Contact from './ContactComponent';
 import Reservation from './ReservationComponent';
 import Favorites from './FavoritesComponent';
 import DishDetail from './DishDetailComponent';
+import Area from './AreaComponent';
 import Profile from './ProfileComponent';
 import OrderSummary from './OrderSummaryComponent';
 import Login from './LoginComponent';
@@ -41,7 +42,8 @@ const MenuNavigator = createStackNavigator({
                 color='white' onPress={() => navigation.toggleDrawer()} />
         })
     },
-    DishDetail: { screen: DishDetail }
+    DishDetail: { screen: DishDetail },
+    Area : {screen : Area}
 }, {
         initialRouteName: 'Menu',
         navigationOptions: {

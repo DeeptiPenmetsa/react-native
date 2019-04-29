@@ -27,6 +27,7 @@ const mapDispatchToProps = dispatch => ({
 
 function RenderDish(props) {
     const dish = props.dish;
+    const {navigate} = props.navigation;
 
     handleViewRef = ref => this.view = ref;
 
@@ -122,13 +123,20 @@ function RenderDish(props) {
                             type='font-awesome'
                             color='#f50'
                             onPress={() => props.cart ? console.log('Already added to cart') : props.onPressCart()} />
-                        <Icon
+                        {/* <Icon
                             raised
                             reverse
                             name='share'
                             type='font-awesome'
                             color='#51D2A8'
-                            onPress={() => shareDish(dish.name, dish.description, baseUrl + dish.image)} />
+                            onPress={() => shareDish(dish.name, dish.description, baseUrl + dish.image)} /> */}
+                           <Icon
+                            raised
+                            reverse
+                            name='area-chart'
+                            type='font-awesome'
+                            color='#51D2A8'
+                            onPress={() => navigate('Area')} />
                     </View>
                 </Card>
             </Animatable.View>
@@ -191,6 +199,7 @@ class DishDetail extends Component {
                     onPress={() => this.markFavorite(dishId)}
                     postComment={this.props.postComment}
                     onPressCart={() => this.addToCart(dishId)}
+                    navigation = {this.props.navigation}
                 />
                 <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} />
             </ScrollView>
