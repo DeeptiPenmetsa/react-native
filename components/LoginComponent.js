@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
 import { Card, Icon, Input, CheckBox } from 'react-native-elements';
 import { SecureStore, Permissions } from 'expo';
 import { createBottomTabNavigator } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
-import { baseUrl } from '../shared/baseUrl';
 import { connect } from 'react-redux';
-import { registerUser} from '../redux/ActionCreators';
+import { registerUser } from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
@@ -26,7 +25,8 @@ class LoginTab extends Component {
         this.state = {
             username: '',
             password: '',
-            remember: false
+            remember: false,
+            error: ''
         }
     }
     componentDidMount() {
@@ -57,7 +57,7 @@ class LoginTab extends Component {
             const { navigate } = this.props.navigation;
             navigate('Home')
         } else {
-            return ('Username or password is incorrect');
+            this.setState({ error: 'Username or password is incorrect' });
         }
 
     }
@@ -79,6 +79,7 @@ class LoginTab extends Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
+                <Text style={{ color: 'red' }}>{this.state.error}</Text>
                     <Input
                         placeholder="Username"
                         leftIcon={{ type: 'font-awesome', name: 'user-o' }}
@@ -118,7 +119,7 @@ class LoginTab extends Component {
                     </View>
                     <View style={styles.formButton}>
                         <Button
-                            onPress={() => { this.handleLogin(); this.resetForm(); }}
+                            onPress={() => {this.resetForm(); }}
                             title="Logout"
                             icon={
                                 <Icon
@@ -151,7 +152,8 @@ class RegisterTab extends Component {
             firstname: '',
             lastname: '',
             email: '',
-            remember: false
+            remember: false,
+            error: ''
         }
     }
 
@@ -162,16 +164,40 @@ class RegisterTab extends Component {
             firstname: '',
             lastname: '',
             email: '',
-            remember: false
+            remember: false,
+            error: ''
         });
     }
 
     handleRegister() {
         console.log(JSON.stringify(this.state));
-        this.props.registerUser(this.state.username, this.state.password, this.state.firstname, this.state.lastname, this.state.email);
-        if (this.state.remember)
+        if (this.state.remember) {
             SecureStore.setItemAsync('userinfo', JSON.stringify({ username: this.state.username, password: this.state.password }))
                 .catch((error) => console.log('Could not save user info', error));
+        } 
+
+        let filteredUsers = this.props.users.users.filter(user => {
+            return (user.username === this.state.username || user.email === this.state.email);
+        });
+
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+
+        if(this.state.username.trim() === '' || this.state.password.trim() === '' 
+        || this.state.firstname.trim() === '' || this.state.lastname.trim() === '' || this.state.email.trim() === ''){
+            this.setState({ error: 'Fields Must not be blank' });  
+        } else if(reg.test(this.state.email) === false){
+            this.setState({ error: 'Invalid Email' });  
+        }else if (filteredUsers.length) {
+            this.setState({ error: 'Username or Email is already taken' }); 
+            
+        } else {
+            this.props.registerUser(this.state.username, this.state.password, this.state.firstname, this.state.lastname, this.state.email);
+            this.resetForm();
+            const { navigate } = this.props.navigation;
+            navigate('Login');         
+        }
+
+       
 
     }
 
@@ -189,10 +215,10 @@ class RegisterTab extends Component {
 
 
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <ScrollView>
                 <View style={styles.container}>
+                <Text style={{ color: 'red'}}>{this.state.error}</Text>
                     <Input
                         placeholder="Username"
                         leftIcon={{ type: 'font-awesome', name: 'user-o' }}
@@ -236,7 +262,7 @@ class RegisterTab extends Component {
                     />
                     <View style={styles.formButton}>
                         <Button
-                            onPress={() => { this.handleRegister(); this.resetForm(); navigate('Login') }}
+                            onPress={() => { this.handleRegister(); }}
                             title="Register"
                             icon={
                                 <Icon
