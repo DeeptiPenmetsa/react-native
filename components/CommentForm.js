@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, StyleSheet, Picker, Switch, Button, Modal, TextInput } from 'react-native';
-import { Card, Rating, Icon } from 'react-native-elements';
+import { Card, AirbnbRating, Icon } from 'react-native-elements';
 
 class Comment extends Component {
 
@@ -56,7 +56,7 @@ class Comment extends Component {
                     onDismiss={() => { this.toggleModal(); this.resetForm() }}
                     onRequestClose={() => { this.toggleModal(); this.resetForm() }}
                 >
-                    <Rating
+                    <AirbnbRating
                         showRating
                         value={this.state.rating}
                         onFinishRating={(value) => this.setState({ rating: value })}

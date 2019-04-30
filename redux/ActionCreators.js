@@ -108,6 +108,31 @@ export const addUser = (user) => ({
 
 });
 
+export const addUsers = (users) => ({
+    type: ActionTypes.ADD_USERS,
+    payload: users
+});
+
+export const fetchUsers = () => (dispatch) => {
+    return fetch(baseUrl + 'users')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(comments => dispatch(addUsers(comments)))
+    .catch(error => { console.log('User Loading Failed', error.message); alert('User cannot be Loaded\nError: '+error.message); });
+};
+
 export const putDish = (id, name, image, category, label, price, featured, quantity, description) => (dispatch) => {
 
     const dishUpdated = {

@@ -133,10 +133,10 @@ function RenderDish(props) {
                            <Icon
                             raised
                             reverse
-                            name='area-chart'
+                            name='line-chart'
                             type='font-awesome'
                             color='#51D2A8'
-                            onPress={() => navigate('Area')} />
+                            onPress={() => navigate('Area',{ dishId: dish.id })} />
                     </View>
                 </Card>
             </Animatable.View>

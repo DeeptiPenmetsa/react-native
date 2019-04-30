@@ -42,6 +42,7 @@ class LoginTab extends Component {
 
     handleLogin() {
         console.log(JSON.stringify(this.state))
+        console.log(JSON.stringify(this.props.users.users));
         if (this.state.remember)
             SecureStore.setItemAsync('userinfo', JSON.stringify({ username: this.state.username, password: this.state.password }))
                 .catch((error) => console.log('Could not save user info', error));

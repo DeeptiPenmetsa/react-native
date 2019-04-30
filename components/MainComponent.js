@@ -14,7 +14,7 @@ import { View, Platform, Image, StyleSheet, ScrollView, Text } from 'react-nativ
 import { Icon } from 'react-native-elements';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
-import { fetchDishes, fetchComments, fetchLeaders, fetchPromos, fetchContact } from '../redux/ActionCreators';
+import { fetchDishes, fetchComments, fetchLeaders, fetchPromos, fetchContact, fetchUsers } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -31,7 +31,8 @@ const mapDispatchToProps = dispatch => ({
     fetchComments: () => dispatch(fetchComments()),
     fetchPromos: () => dispatch(fetchPromos()),
     fetchLeaders: () => dispatch(fetchLeaders()),
-    fetchContact: () => dispatch(fetchContact())
+    fetchContact: () => dispatch(fetchContact()),
+    fetchUsers: ()=> dispatch(fetchUsers())
 })
 
 const MenuNavigator = createStackNavigator({
@@ -344,6 +345,7 @@ class Main extends Component {
         this.props.fetchLeaders();
         this.props.fetchPromos();
         this.props.fetchContact();
+        this.props.fetchUsers();
     }
 
     render() {

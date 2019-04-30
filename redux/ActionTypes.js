@@ -19,3 +19,4 @@ export const CONTACT_FAILED = 'CONTACT_FAILED';
 export const UPDATE_DISH = 'UPDATE_DISH';
 export const DELETE_ORDER = 'DELETE_ORDER';
 export const ADD_USER = 'ADD_USER';
+export const ADD_USERS = 'ADD_USERS';

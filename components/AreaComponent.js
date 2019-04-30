@@ -33,9 +33,9 @@ class Area extends React.PureComponent {
    };
 
   reorderData = () => {
-    const reorderedData = this.props.comments.comments.sort((a, b) => {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
+    const dishId = this.props.navigation.getParam('dishId', '');
+    const commentsData=this.props.comments.comments.filter((comment) => comment.dishId === dishId);
+    const reorderedData = commentsData.sort((a, b) => {
       return new Date(a.date) - new Date(b.date);
     });
 
